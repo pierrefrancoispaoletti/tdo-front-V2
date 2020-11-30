@@ -5,14 +5,17 @@ import {
   Container,
   Divider,
   Grid,
-  Menu,
+  Transition,
 } from 'semantic-ui-react';
-import { compareObjects } from '../../../utils/utils';
 import ItemTitle from '../ItemTitle/ItemTitle';
 import LoaderComponent from '../../Loader/Loader';
 import ItemComponent from '../ItemComponent/ItemComponent';
+import {
+  antipastiReq, carneReq, pastaReq, tagliateReq,
+} from '../../../utils/axiosCalls';
 
-const Cuisine = ({ title }) => {
+const Cuisine = ({ title, MenuComponent }) => {
+  const [mounted, setMounted] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tagliate, setTagliate] = useState([]);
@@ -21,19 +24,16 @@ const Cuisine = ({ title }) => {
   const [carne, setCarne] = useState([]);
 
   useEffect(() => {
-    let mounted = true;
+    setMounted(true);
     setLoading(true);
-    const tagliateReq = Axios.get('https://le-tdo.com/wp-json/wp/v2/tagliate');
-    const pastaReq = Axios.get(
-      'https://le-tdo.com/wp-json/wp/v2/ptes_et_risottos',
-    );
-    const antipastiReq = Axios.get(
-      'https://le-tdo.com/wp-json/wp/v2/les_antipasti',
-    );
-    const carneReq = Axios.get('https://le-tdo.com/wp-json/wp/v2/la_carne');
-    Axios.all([tagliateReq, pastaReq, antipastiReq, carneReq]).then(
+    Axios.all([
+      tagliateReq,
+      pastaReq,
+      antipastiReq,
+      carneReq,
+    ]).then(
       Axios.spread((...responses) => {
-        if (mounted) {
+        if (!mounted) {
           setTagliate(responses[0].data);
           setPasta(responses[1].data);
           setAntipasti(responses[2].data);
@@ -44,73 +44,43 @@ const Cuisine = ({ title }) => {
       }),
     );
     return function cleanup() {
-      mounted = false;
+      setMounted(false);
     };
   }, []);
   return (
-    <Container>
-      <ItemTitle title={title} />
-      <Divider />
-      <Menu
-        size="tiny"
-        compact
-        widths={4}
-        className="menu__categories"
-        activeIndex="1"
-      >
-        <Menu.Item
-          index={1}
-          name="antipasti"
-          active={items.type === 'antipasti'}
-          onClick={() => {
-            setItems(
-              antipasti.sort((item1, item2) => compareObjects(item1, item2, 'meta')),
-            );
-          }}
+    <Transition
+      visible={mounted}
+      animation="fly left"
+      duration={1000}
+    >
+      <Container>
+        <ItemTitle title={title} />
+        <Divider />
+        <MenuComponent
+          items={items}
+          setItems={setItems}
+          tagliate={tagliate}
+          antipasti={antipasti}
+          pasta={pasta}
+          carne={carne}
         />
-        <Menu.Item
-          name="tagliate"
-          active={items.type === 'tagliates'}
-          onClick={() => {
-            setItems(
-              tagliate.sort((item1, item2) => compareObjects(item1, item2, 'meta')),
-            );
-          }}
-        />
-        <Menu.Item
-          name="pasta"
-          active={items.type === 'pasta e risotti'}
-          onClick={() => {
-            setItems(
-              pasta.sort((item1, item2) => compareObjects(item1, item2, 'meta')),
-            );
-          }}
-        />
-        <Menu.Item
-          name="la carne"
-          active={items.type === 'carne'}
-          onClick={() => {
-            setItems(
-              carne.sort((item1, item2) => compareObjects(item1, item2, 'meta')),
-            );
-          }}
-        />
-      </Menu>
-      <Divider />
-      {loading === true && <LoaderComponent />}
-      {loading === false && (
+        <Divider />
+        {loading === true && <LoaderComponent />}
+        {loading === false && (
         <Grid columns={2}>
           {items.map((item) => (
             <ItemComponent key={item.id} item={item} />
           ))}
         </Grid>
-      )}
-    </Container>
+        )}
+      </Container>
+    </Transition>
   );
 };
 
 Cuisine.propTypes = {
   title: PropTypes.string.isRequired,
+  MenuComponent: PropTypes.elementType.isRequired,
 };
 
 export default Cuisine;

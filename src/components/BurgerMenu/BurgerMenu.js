@@ -26,7 +26,7 @@ const BurgerMenu = ({ children, openMenu, setOpenMenu }) => {
         width="thin"
       >
         {Links.map((link) => (
-          <Link key={link.name} to={link.slug}>
+          <Link key={link.name} to={link.slug} onClick={() => setOpenMenu(false)}>
             <Menu.Item active={location.pathname === link.slug} className="foodItems main__title">
               <Menu.Header>
                 <FontAwesomeIcon icon={link.icon} size="3x" />

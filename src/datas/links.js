@@ -8,6 +8,7 @@ import BoissonsMenu from '../components/Items/ItemsMenu/BoissonsMenu';
 import CicchetteriaMenu from '../components/Items/ItemsMenu/CicchetteriaMenu';
 import PizzeMenu from '../components/Items/ItemsMenu/PizzeMenu';
 import VinsMenu from '../components/Items/ItemsMenu/VinsMenu';
+import CuisineMenu from '../components/Items/ItemsMenu/CuisineMenu';
 
 const Links = [
   {
@@ -27,6 +28,7 @@ const Links = [
     title: 'La Cuisine',
     component: Cuisine,
     apiEndpoint: ['tagliate', 'ptes_et_risottos', 'les_antipasti', 'la_carne'],
+    menu: CuisineMenu,
 
   },
   {

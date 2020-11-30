@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/tdo/static/css/main.86140680.chunk.css",
+    "main.js": "/tdo/static/js/main.d97de2a0.chunk.js",
+    "main.js.map": "/tdo/static/js/main.d97de2a0.chunk.js.map",
+    "runtime-main.js": "/tdo/static/js/runtime-main.3b5148ae.js",
+    "runtime-main.js.map": "/tdo/static/js/runtime-main.3b5148ae.js.map",
+    "static/css/2.d4618415.chunk.css": "/tdo/static/css/2.d4618415.chunk.css",
+    "static/js/2.fcd44f25.chunk.js": "/tdo/static/js/2.fcd44f25.chunk.js",
+    "static/js/2.fcd44f25.chunk.js.map": "/tdo/static/js/2.fcd44f25.chunk.js.map",
+    "index.html": "/tdo/index.html",
+    "static/css/2.d4618415.chunk.css.map": "/tdo/static/css/2.d4618415.chunk.css.map",
+    "static/css/main.86140680.chunk.css.map": "/tdo/static/css/main.86140680.chunk.css.map",
+    "static/js/2.fcd44f25.chunk.js.LICENSE.txt": "/tdo/static/js/2.fcd44f25.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/tdo/static/media/outline-icons.ddae9b1b.woff",
+    "static/media/logoFondNoir.97d82486.svg": "/tdo/static/media/logoFondNoir.97d82486.svg",
+    "static/media/pizza.aecd3bc5.jpeg": "/tdo/static/media/pizza.aecd3bc5.jpeg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3b5148ae.js",
+    "static/css/2.d4618415.chunk.css",
+    "static/js/2.fcd44f25.chunk.js",
+    "static/css/main.86140680.chunk.css",
+    "static/js/main.d97de2a0.chunk.js"
+  ]
+}

@@ -1,0 +1,9 @@
+@import '../../styles/vars';
+
+.footer {
+  &__container{
+    &__header {
+      color: $text-color !important;
+    }
+  }
+}
